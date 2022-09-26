@@ -8,5 +8,5 @@ module "kubernetes_modules" {
   source = "../../modules/kubernetes"
 
   namespace = var.namespace
-  env       = var.env
+  # env       = var.env
 }

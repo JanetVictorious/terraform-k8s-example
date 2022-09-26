@@ -22,7 +22,7 @@ spec:
         ports:
         - containerPort: 8501
         volumeMounts:
-          - name: tf-serving-volume
+          - name: model-serving-volume
             mountPath: /models/half_plus_two
         resources:
           requests:
@@ -32,7 +32,7 @@ spec:
             memory: 64M
             cpu: 10m
       volumes:
-        - name: tf-serving-volume
+        - name: model-serving-volume
           hostPath:
             path: /var/tmp/saved_model_half_plus_two_cpu
             type: Directory

@@ -22,3 +22,6 @@ override.tf.json
 # example: *tfplan*
 
 .DS_Store
+.vscode
+.venv
+__pycache__

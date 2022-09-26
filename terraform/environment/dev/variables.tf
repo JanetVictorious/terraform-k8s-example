@@ -1,4 +1,4 @@
-variable "environment" {
+variable "env" {
   description = "Dev environment"
 }
 
