@@ -1,6 +1,5 @@
 import os
 import logging
-from enum import Enum
 
 from sklearn.pipeline import make_pipeline
 from sklearn.impute import SimpleImputer
@@ -11,10 +10,10 @@ from sklearn.metrics import f1_score, confusion_matrix
 
 import dill
 
-from simple_pipeline.constants import TARGET, TARG_FEAT, MISSING_VAL, NUM_FEAT, CAT_FEAT
-from simple_pipeline.utils.data_utils import read_csv
-from simple_pipeline.utils.models import ModelName, _services
-from simple_pipeline.utils.params import model_params
+from training_pipeline.constants import TARGET, TARG_FEAT, MISSING_VAL, NUM_FEAT, CAT_FEAT
+from training_pipeline.utils.data_utils import read_csv
+from training_pipeline.utils.models import ModelName, _services
+from training_pipeline.utils.params import model_params
 
 
 def run_pipeline(input_dir: str = ...,
@@ -27,7 +26,7 @@ def run_pipeline(input_dir: str = ...,
     logging.info('=' * 50)
 
     # Create model object
-    logging.info('Creating model object...')
+    logging.info(f'Creating model object {model_name}...')
     params = model_params.get(model_name)
     MODEL = _services.get(ModelName(model_name).value, **params)
 
@@ -114,8 +113,8 @@ def run_pipeline(input_dir: str = ...,
     logging.info(f'Confusion matrix: \n{cm}')
 
     # Export results
-    model_path = os.path.abspath(os.path.join(output_path, 'model_object.pkl'))
+    model_path = os.path.abspath(os.path.join(output_path, f'{model_name}_model.pkl'))
     with open(model_path, 'wb') as file:
-        dill.dump((model, preprocessor, NUM_FEAT,
-                  CAT_FEAT, TARG_FEAT, TARGET),
-                  file)
+        dill.dump((model, features, TARG_FEAT, targ_conv), file)
+
+    logging.info(f'Output saved to: {model_path}')

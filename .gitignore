@@ -25,3 +25,5 @@ override.tf.json
 .vscode
 .venv
 __pycache__
+.ipynb_checkpoints
+logging/**

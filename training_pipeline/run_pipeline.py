@@ -1,15 +1,8 @@
+import os
 import argparse
 import logging
 
-from simple_pipeline.pipeline_utils import run_pipeline
-
-
-# Set logging configuration
-logging.basicConfig(
-    level=logging.INFO,
-    format='[%(asctime)s][%(levelname)5s][%(filename)s:%(lineno)d] %(message)s',
-)
-LOG = logging.getLogger(__name__)
+from training_pipeline.pipeline_utils import run_pipeline
 
 
 def _parse_args():
@@ -20,12 +13,12 @@ def _parse_args():
     required.add_argument('--input_dir',
                           help='Input data directory',
                           dest='input_dir',
-                          default='./simple_pipeline/data')
+                          default='./training_pipeline/data')
 
     required.add_argument('--output_dir',
                           help='Output directory',
                           dest='output_dir',
-                          default='./simple_pipeline/output')
+                          default='./training_pipeline/output')
 
     required.add_argument('--model_name',
                           help='Selected model approach',
@@ -38,10 +31,19 @@ def _parse_args():
 
 
 if __name__ == '__main__':
+    # Parse input arguments
     PARSER = _parse_args()
+
+    # Set logging configuration
+    LOG_PATH = os.path.abspath(os.path.join(f'./logging/{PARSER.model_name}.log'))
+    logging.basicConfig(format='[%(asctime)s][%(levelname)5s][%(filename)s:%(lineno)d] %(message)s',
+                        level=logging.INFO,
+                        handlers=[logging.FileHandler(LOG_PATH), logging.StreamHandler()],)
+    LOG = logging.getLogger(__name__)
 
     LOG.info('Run training pipeline')
 
+    # Start training pipeline
     run_pipeline(input_dir=PARSER.input_dir,
                  output_dir=PARSER.output_dir,
                  model_name=PARSER.model_name)

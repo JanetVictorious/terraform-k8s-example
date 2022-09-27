@@ -1,6 +1,6 @@
 import numpy as np
 
-from simple_pipeline.constants import DTYPES, CIDX, TARG_FEAT, MISSING_VAL
+from training_pipeline.constants import DTYPES, CIDX, TARG_FEAT, MISSING_VAL
 
 
 def read_csv(data_path: str) -> tuple[np.ndarray, dict]:

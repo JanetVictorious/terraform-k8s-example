@@ -22,4 +22,4 @@ NUM_FEAT = [i for i in CIDX if DTYPES[i] == 'float' and CNAMES[i] != TARGET]
 CAT_FEAT = [i for i in CIDX if DTYPES[i] != 'float' and CNAMES[i] != TARGET]
 
 # Missing value types
-MISSING_VAL = ['', 'nan', 'NA', 'NaN', 'None', '.', np.nan, None]
+MISSING_VAL = ['', 'nan', 'NA', 'NaN', 'None', '.', np.nan, None, 'na']
