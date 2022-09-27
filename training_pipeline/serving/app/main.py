@@ -20,7 +20,7 @@ class Penguin(BaseModel):
 @app.on_event('startup')
 def load_model():
     """Load model object from pickle file"""
-    with open('/app/training_pipeline/output/serving/logistic_model.pkl', 'rb') as file:
+    with open('./training_pipeline/output/serving/logistic_model.pkl', 'rb') as file:
         # f = file.read().replace(b'\r\n', b'\n')
         global model, feat_idx, targ_feat, targ_conv
         model, feat_idx, targ_feat, targ_conv = pickle.load(file)
@@ -53,10 +53,19 @@ def predict(penguin: Penguin):
     # Predict
     pred = model.predict(rearr_data_point).tolist()
     pred = pred[0]
-    pred_name = targ_conv.get(pred)
+
+    # Extract penguin name
+    pred_name = [k for k, v in targ_conv.items() if v == pred]
+    pred_name = pred_name[0]
     print(pred_name)
     return {"Prediction": pred_name}
 
 
 if __name__ == '__main__':
+    """This is for debugging purposes only.
+
+    Run debugger and set breakpoints above where needed.
+    Go to http://0.0.0.0/docs and run a POST, the debugger
+    will stop at first breakpoint.
+    """
     uvicorn.run(app, host='0.0.0.0', port=80)
