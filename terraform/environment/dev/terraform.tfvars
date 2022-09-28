@@ -1,2 +1,2 @@
 env       = "dev"
-namespace = "dev-cluster-ns"
+namespace = "cluster-ns"

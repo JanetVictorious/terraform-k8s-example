@@ -21,7 +21,6 @@ class Penguin(BaseModel):
 def load_model():
     """Load model object from pickle file"""
     with open('./training_pipeline/output/serving/logistic_model.pkl', 'rb') as file:
-        # f = file.read().replace(b'\r\n', b'\n')
         global model, feat_idx, targ_feat, targ_conv
         model, feat_idx, targ_feat, targ_conv = pickle.load(file)
 

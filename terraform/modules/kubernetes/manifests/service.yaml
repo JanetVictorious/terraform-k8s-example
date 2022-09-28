@@ -8,8 +8,8 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - port: 8501
-    targetPort: 8501
+  - port: 80
+    targetPort: 80
     nodePort: 30001
     protocol: TCP
     name: model-serving-http

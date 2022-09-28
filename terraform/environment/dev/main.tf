@@ -7,6 +7,6 @@ module "kubernetes_modules" {
   # depends_on = [module.azure_modules]
   source = "../../modules/kubernetes"
 
+  env       = var.env
   namespace = var.namespace
-  # env       = var.env
 }

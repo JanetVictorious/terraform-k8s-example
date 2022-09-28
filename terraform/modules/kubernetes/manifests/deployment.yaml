@@ -15,15 +15,11 @@ spec:
     spec:
       containers:
       - name: model-serving
-        image: tensorflow/serving
+        image: model-serving:3.10.6
+        imagePullPolicy: Never
         envFrom:
-        - configMapRef:
-            name: ${configmap}
         ports:
-        - containerPort: 8501
-        volumeMounts:
-          - name: model-serving-volume
-            mountPath: /models/half_plus_two
+        - containerPort: 80
         resources:
           requests:
             memory: 32M
@@ -31,8 +27,3 @@ spec:
           limits:
             memory: 64M
             cpu: 10m
-      volumes:
-        - name: model-serving-volume
-          hostPath:
-            path: /var/tmp/saved_model_half_plus_two_cpu
-            type: Directory

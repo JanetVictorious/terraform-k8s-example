@@ -17,6 +17,7 @@ CNAMES = ['species', 'island', 'culmen_length_mm', 'culmen_depth_mm', 'flipper_l
 DTYPES = ['object', 'object', 'float', 'float', 'int', 'int', 'object']
 CIDX = [i for i in range(len(CNAMES))]
 
+# NOTE: Do not modify!
 TARG_FEAT = [i for i in CIDX if CNAMES[i] == TARGET]
 NUM_FEAT = [i for i in CIDX if DTYPES[i] == 'float' and CNAMES[i] != TARGET]
 CAT_FEAT = [i for i in CIDX if DTYPES[i] != 'float' and CNAMES[i] != TARGET]
