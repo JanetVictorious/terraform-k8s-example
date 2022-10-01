@@ -1,6 +1,6 @@
 # Terraform Kubernetes Example
 
-This is an example of training a ML model, creating an app using `FastAPI`, and deploy it on a k8s cluster using `minikube` specifying all resources with `Terraform`.
+This is an example of training a ML model, creating an app using `FastAPI`, and deploy it on a k8s cluster using Minikube specifying all resources with Terraform.
 
 ---
 
@@ -76,11 +76,11 @@ This will start the API session, go to [localhost](https://localhost:80/docs) an
 
 ## Terraform resources
 
-All terraform resources reside in the [terraform folder](/terraform/). The main orchestration script is [main.tf](/terraform/environment/dev/main.tf) which will specify to use `minikube` as configuration and which [Kubernetes modules](/terraform/modules/kubernetes/main.tf) to deploy.
+All terraform resources reside in the [terraform folder](/terraform/). The main orchestration script is [main.tf](/terraform/environment/dev/main.tf) which will specify to use Minikube as configuration and which [Kubernetes modules](/terraform/modules/kubernetes/main.tf) to deploy.
 
 Some convetion:
 
-* `main.tf` scripts are describing `Terraform` resources/modules
+* `main.tf` scripts are describing Terraform resources/modules
 * `variables.tf` / `terraform.tfvars` describes variables being used
 * `versions.tf` describes provider versions used for resources
 
@@ -88,25 +88,25 @@ Some convetion:
 
 All `YAML` manifests reside in the [manifest folder](/terraform/modules/kubernetes/manifests/).
 
-While there are Kubernetes resources on `Terraform` for deployment, service, etc. the use of traditional `YAML` files are sometimes nice to have. By utilizing the `kubernetes_manifest` (from Kubernetes) or `kubectl_manifest` (from `gavinbunney/kubectl`) you can easily deploy to a cluster by using already existing `YAML` files. One advantage of this is that you can keep your code small while still deploying large complex `YAML` files.
+While there are Kubernetes resources on Terraform for deployment, service, etc. the use of traditional `YAML` files is somewhat nice. By utilizing the [kubernetes_manifest](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest) or [kubectl_manifest](https://registry.terraform.io/providers/gavinbunney/kubectl/latest/docs/resources/kubectl_manifest) you can easily deploy to a cluster by using already existing `YAML` files. One advantage of this is that you can keep your Terraform code small while still deploying large complex `YAML` files.
 
 ---
 
 ## Run cluster on minikube
 
-Before deploying resources start `minikube`:
+Before deploying resources start Minikube:
 
 ```bash
 minikube start --driver=docker
 ```
 
-In order for the cluster to use your docker image, run the Docker daemon out of `minikube`:
+In order for the cluster to use your docker image, run the Docker daemon out of Minikube:
 
 ```bash
 eval $(minikube docker-env)
 ```
 
-Build docker image on `minikube`:
+Build docker image on Minikube:
 
 ```bash
 docker build -t model-serving:3.10.6 .
@@ -128,7 +128,7 @@ docker images
 terraform init
 ```
 
-This will initialize `Terraform` and download required providers and versions.
+This will initialize Terraform and download required providers and versions.
 
 Run the following to apply manifests:
 
@@ -205,7 +205,7 @@ Please run this command in a separate window: `minikube service model-serving-se
 ❗  Because you are using a Docker driver on darwin, the terminal needs to be open to run it.
 ```
 
-This opens a tunnel to your service with a random port. Grab the URL at the bottom right box and use it in the curl command like this in Linux/Mac:
+This opens a tunnel to your service with a random port. Grab the URL at the bottom right box and use it in the curl command like this:
 
 ```bash
 curl -X POST http://127.0.0.1:49688/predict \
@@ -232,7 +232,7 @@ If the command is successful you should see something like:
 
 #### Horisontal Pod Autoscaler
 
-Launch Metrics Server in `minikube`:
+Launch Metrics Server in Minikube:
 
 ```bash
 minikube addons enable metrics-server
