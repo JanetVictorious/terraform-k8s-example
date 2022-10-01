@@ -1,12 +1,17 @@
 # Terraform Kubernetes Example
 
-This is a stab at deploying a model on a k8s cluster using `minikube` specifying and deploying all resources with `Terraform`.
+This is an example of training a ML model, creating an app using `FastAPI`, and deploy it on a k8s cluster using `minikube` specifying all resources with `Terraform`.
 
 ---
 
-## Python training pipeline
+## Training pipeline
 
 Train a simple model to be used for *simulated* online inference.
+
+A logisic classifier trained on the penguin dataset is already trained and resides under [output/serving](/training_pipeline/output/serving/).
+
+<details>
+<summary> <i> Training a model with custom data </i> </summary>
 
 * Upload data to the [data folder](/training_pipeline/data/).
 * Modify parameters in [constants.py](/training_pipeline/constants.py) to fit the `target` and `features` of the dataset.
@@ -14,9 +19,20 @@ Train a simple model to be used for *simulated* online inference.
 
 > NOTE: This pipeline is deliberately using `numpy` over `pandas`. Many steps could have been simplified with the built-in functionalities of `pandas` but for various reasons `pandas` was excluded.
 
+</details>
+<br>
+
 ### Serving with FastAPI
 
-Modify class `Penguin` in [main.py](/training_pipeline/serving/app/main.py) to fit dataset.
+<details>
+<summary> <i> Custom model API </i> </summary>
+
+Modify class `Penguin` in [main.py](/training_pipeline/serving/app/main.py) to custom fit dataset.
+
+Make other adjustments to `load_model` and `predict` to fit data and model type.
+
+</details>
+<br>
 
 Build docker image:
 
@@ -43,13 +59,18 @@ curl -X POST http://localhost:80/predict \
     -H "Content-Type: application/json"
 ```
 
-> Once you've verified that the running container can take input data and return predictions you can stop the running API.
+> Once you've verified that the running container can take a request and return predictions you can stop the running API.
 
-#### Debugging FastAPI
+
+<details>
+<summary> <i> Debugging FastAPI </i> </summary>
 
 In case the API needs debugging, set breakpoint in [main.py](/training_pipeline/serving/app/main.py) and run debugger from your console (VSCode, Pycharm, etc.).
 
 This will start the API session, go to [localhost](https://localhost:80/docs) and send an example `JSON` (or send data via `curl`) to the API. You should hit the breakpoint and you can start debugging.
+
+</details>
+<br>
 
 ---
 
@@ -59,7 +80,7 @@ All terraform resources reside in the [terraform folder](/terraform/). The main 
 
 Some convetion:
 
-* `main.tf` scripts are describing `Terraform` resources
+* `main.tf` scripts are describing `Terraform` resources/modules
 * `variables.tf` / `terraform.tfvars` describes variables being used
 * `versions.tf` describes provider versions used for resources
 
