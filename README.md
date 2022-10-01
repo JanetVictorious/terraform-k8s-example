@@ -247,6 +247,30 @@ To test the autoscaling capability of the deployment, run the bash script (`requ
 /bin/bash request.sh
 ```
 
+<details>
+<summary> <i> Troubleshooting: Click here if `request.sh` command is not working </i> </summary>
+
+If you experience a similar problem as when trying to send request with `$(minikube ip):3001` modify `request.sh` as follows:
+
+```bash
+do curl -X POST http://127.0.0.1:49688/predict \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "island": "Torgersen",
+  "culmen_length_mm": 39.1,
+  "culmen_depth_mm": 18.7,
+  "flipper_length_mm": 181,
+  "body_mass_g": 3750,
+  "sex": "MALE"
+}';
+```
+
+Remember this requires your tunnel to be open.
+
+</details>
+<br>
+
 You should see the results being printed in quick succession:
 
 ```shell
