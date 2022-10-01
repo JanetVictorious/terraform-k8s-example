@@ -3,5 +3,5 @@ variable "env" {
 }
 
 variable "namespace" {
-  description = "Dev environment namespace"
+  description = "Environment namespace"
 }
