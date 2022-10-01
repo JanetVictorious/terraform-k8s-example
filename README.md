@@ -115,7 +115,7 @@ Run the following to apply manifests:
 terraform apply
 ```
 
-This will create a `deployment`, `service`, and `autoscaling` in the `dev` `namespace`.
+This will create a `deployment`, `service`, and `autoscaling` under namespace `dev-cluster-ns`.
 
 #### Deployment & Service
 
