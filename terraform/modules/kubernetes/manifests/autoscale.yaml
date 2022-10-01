@@ -2,8 +2,8 @@ apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
   labels:
-    app: tf-serving
-  name: tf-serving-hpa
+    app: model-serving
+  name: model-serving-hpa
   namespace: ${namespace}
 spec:
   maxReplicas: 3
