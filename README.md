@@ -171,7 +171,7 @@ model-serving-service   NodePort   10.102.166.117   <none>        80:30001/TCP  
 You can try accessing the deployment now as a sanity check. The following `curl` command will send a row of inference requests to the Nodeport service:
 
 ```bash
-curl -X POST $(minikube ip):3001/predict \
+curl -X POST $(minikube ip):30001/predict \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
