@@ -12,5 +12,8 @@ model_params = {
         'min_samples_leaf': 0.3,
         'max_features': 0.8,
         'max_leaf_nodes': 3,
-    }
+    },
+    'svc2': {
+        'C': 0.5,
+    },
 }

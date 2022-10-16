@@ -39,3 +39,4 @@ terraform.rc
 __pycache__
 .ipynb_checkpoints
 logging/**
+!logging/foo.txt

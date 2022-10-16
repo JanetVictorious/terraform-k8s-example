@@ -28,32 +28,12 @@ class LogisticModel(SklearnModelMixin):
                                          **kwargs)
 
 
-class LogisticModelBuilder:
-    def __init__(self):
-        self._model = None
-
-    def __call__(self, **params):
-        if not self._model:
-            self._model = LogisticModel(**params)
-        return self._model
-
-
 class SvcModel(SklearnModelMixin):
     def __init__(self, **kwargs):
         self._model = LinearSVC(penalty='l1',
                                 dual=False,
                                 random_state=42,
                                 **kwargs)
-
-
-class SvcModelBuilder:
-    def __init__(self):
-        self._model = None
-
-    def __call__(self, **params):
-        if not self._model:
-            self._model = SvcModel(**params)
-        return self._model
 
 
 class RandomForestModel(SklearnModelMixin):
@@ -64,13 +44,14 @@ class RandomForestModel(SklearnModelMixin):
                                              **kwargs)
 
 
-class RandomForestModelBuilder:
-    def __init__(self):
+class ModelBuilder:
+    def __init__(self, model):
         self._model = None
+        self.model = model
 
     def __call__(self, **params):
         if not self._model:
-            self._model = RandomForestModel(**params)
+            self._model = self.model(**params)
         return self._model
 
 
@@ -98,9 +79,9 @@ class ModelService(ModelFactory):
 _services = ModelService()
 
 # Register models in ModelService
-_services.register_model('logistic', LogisticModelBuilder())
-_services.register_model('svc', SvcModelBuilder())
-_services.register_model('random_forest', RandomForestModelBuilder())
+_services.register_model('logistic', ModelBuilder(LogisticModel))
+_services.register_model('svc', ModelBuilder(SvcModel))
+_services.register_model('random_forest', ModelBuilder(RandomForestModel))
 
 
 class ModelName(str, Enum):
