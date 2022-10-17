@@ -1,6 +1,9 @@
 import numpy as np
 
 # # Example csv
+# # File name
+# FILENAME = 'example.csv'
+
 # # Target column
 # TARGET = 'y'
 
@@ -8,6 +11,9 @@ import numpy as np
 # CNAMES = ['y', 'x1', 'x2', 'x3']
 # DTYPES = ['object', 'float', 'int', 'object']
 # CIDX = [i for i in range(len(CNAMES))]
+
+# File name
+FILENAME = 'penguins_size.csv'
 
 # Target column
 TARGET = 'species'

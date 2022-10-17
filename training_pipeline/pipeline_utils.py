@@ -10,7 +10,7 @@ from sklearn.metrics import f1_score, confusion_matrix
 
 import dill
 
-from training_pipeline.constants import TARGET, TARG_FEAT, MISSING_VAL, NUM_FEAT, CAT_FEAT
+from training_pipeline.constants import FILENAME, TARGET, TARG_FEAT, MISSING_VAL, NUM_FEAT, CAT_FEAT
 from training_pipeline.utils.data_utils import read_csv
 from training_pipeline.utils.models import ModelName, _services
 from training_pipeline.utils.params import model_params
@@ -38,7 +38,7 @@ def run_pipeline(input_dir: str = ...,
     logging.info(f'Target name: {TARGET}')
 
     # Load data
-    data_path = os.path.abspath(os.path.join(input_dir, 'penguins_size.csv'))
+    data_path = os.path.abspath(os.path.join(input_dir, FILENAME))
     logging.info(f'Loading data from: {data_path}')
 
     data, targ_conv = read_csv(data_path)
